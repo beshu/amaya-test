@@ -3,6 +3,7 @@ export default defineNuxtConfig ({
   typescript: {
     strict: false
   },
+
   app: {
     head: {
       title: 'Nuxt-Prisma Example (TypeScript)',
@@ -13,5 +14,7 @@ export default defineNuxtConfig ({
       ],
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     }
-  }
+  },
+
+  compatibilityDate: '2025-02-15'
 });
