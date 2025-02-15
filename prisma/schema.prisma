@@ -3,25 +3,44 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = "postgresql://amaya:amaya@localhost:5432/amaya"
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+model ProductApp {
+  id             Int              @id @default(autoincrement())
+  name           AppName          @unique
+  ProductAppLogo ProductAppLogo[]
+  Review         Review[]
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  viewCount Int      @default(0)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
+model ProductAppLogo {
+  id           Int        @id @default(autoincrement())
+  productApp   ProductApp @relation(fields: [productAppId], references: [id])
+  productAppId Int
+  logoFileName String
+  active       Boolean    @default(false)
+
+  @@index([productAppId])
+}
+
+model Review {
+  id           Int        @id @default(autoincrement())
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  productApp   ProductApp @relation(fields: [productAppId], references: [id])
+  productAppId Int
+  score        Int
+  text         String?
+  signature    String     @default("Anonymous")
+
+  @@index([signature])
+}
+
+enum AppName {
+  FARM
+  ALPHABET
+  CARS
+  COLORS
+  PUZZLE
 }
