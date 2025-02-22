@@ -1,40 +1,36 @@
 <template>
   <div class="layout">
-    <Header />
+    <div class="navigation">
+      <nav>
+        <NuxtLink to="/">Главная</NuxtLink>
+        <NuxtLink to="/settings">Настройки</NuxtLink>
+      </nav>
+    </div>
     <slot />
   </div>
 </template>
 
-<style>
-  html {
-    box-sizing: border-box;
-  }
-
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-      Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  input,
-  textarea {
-    font-size: 16px;
-  }
-
-  button {
-    cursor: pointer;
-  }
-
+<style lang="scss">
+@use "sass:map";
+@use "~/assets/stylesheet/vars";
+body {
   .layout {
-    padding: 0 2rem;
+    height: 100vh;
   }
+}
+.navigation {
+  nav {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 0.13rem;
+    padding: 35px;
+  }
+
+  nav a {
+    padding-inline: 15px;
+    &:hover {
+      color: map.get(vars.$colors, "button-primary-default");
+    }
+  }
+}
 </style>

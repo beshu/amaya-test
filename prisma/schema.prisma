@@ -8,20 +8,10 @@ datasource db {
 }
 
 model ProductApp {
-  id             Int              @id @default(autoincrement())
-  name           AppName          @unique
-  ProductAppLogo ProductAppLogo[]
-  Review         Review[]
-}
-
-model ProductAppLogo {
-  id           Int        @id @default(autoincrement())
-  productApp   ProductApp @relation(fields: [productAppId], references: [id])
-  productAppId Int
+  id           Int      @id @default(autoincrement())
+  name         AppName  @unique
   logoFileName String
-  active       Boolean    @default(false)
-
-  @@index([productAppId])
+  Review       Review[]
 }
 
 model Review {
