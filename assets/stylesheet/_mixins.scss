@@ -1,0 +1,17 @@
+@use "vars";
+
+@mixin apply-viewport($class) {
+  $mobile: map-get(vars.$breakpoints, "xs");
+
+  @media (max-width: $mobile) {
+    .#{$class} {
+      @content (max-width);
+    }
+  }
+
+  @media (min-width: calc($mobile + 1px)) {
+    .#{$class} {
+      @content (min-width); // Inject custom content for min-width
+    }
+  }
+}
